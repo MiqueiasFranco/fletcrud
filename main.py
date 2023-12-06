@@ -16,7 +16,6 @@ db = firestore.client()
 
 def main(pagina:Page):
     pagina.vertical_alignment = MainAxisAlignment.SPACE_AROUND
-    pagina.update()
 
     domingos = (3, 10, 17, 24)
 
@@ -83,7 +82,6 @@ def main(pagina:Page):
 
         if not nomeCliente.value:
             nomeCliente.error_text = "Por favor, digite seu nome!"
-            pagina.update()
         else:
             nome = nomeCliente.value
 
@@ -104,7 +102,6 @@ def main(pagina:Page):
 
                 if not dataCliente.value:
                     dataCliente.error_text = "Por favor, escolha um dia!"
-                    pagina.update()
                 else:
                     dataCliente.value = int(dataCliente.value)
                     if dataCliente.value <= 0 or dataCliente.value > 31 or dataCliente.value == 25:
@@ -116,7 +113,6 @@ def main(pagina:Page):
                             Row([text_resposta], alignment=MainAxisAlignment.CENTER))
                         pagina.add(
                             Row([botao_return], alignment=MainAxisAlignment.CENTER))
-                        pagina.update()
 
                     elif dataCliente.value in domingos:
                         text_resposta = Text(
@@ -126,12 +122,10 @@ def main(pagina:Page):
                             Row([text_resposta], alignment=MainAxisAlignment.CENTER))
                         pagina.add(
                             Row([botao_return], alignment=MainAxisAlignment.CENTER))
-                        pagina.update()
                     else:
 
                         if not horarioCliente.value:
                             horarioCliente.error_text = "Por favor, digite um horario!"
-                            pagina.update()
 
                         else:
                             horarioCliente.value = int(horarioCliente.value)
@@ -143,7 +137,6 @@ def main(pagina:Page):
                                     Row([text_resposta], alignment=MainAxisAlignment.CENTER))
                                 pagina.add(
                                     Row([botao_return], alignment=MainAxisAlignment.CENTER))
-                                pagina.update()
 
                             else:
                                 adicionarDatas = dataCliente.value, horarioCliente.value
@@ -155,7 +148,6 @@ def main(pagina:Page):
                                         Row([text_resposta], alignment=MainAxisAlignment.CENTER))
                                     pagina.add(
                                         Row([botao_return], alignment=MainAxisAlignment.CENTER))
-                                    pagina.update()
 
                                 else:
 
@@ -167,7 +159,6 @@ def main(pagina:Page):
                                     pagina.add(
                                         Row([botao_return], alignment=MainAxisAlignment.CENTER))
 
-                                    pagina.update()
                                     adicionar_novo_dado(e)
 
 
