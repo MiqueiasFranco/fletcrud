@@ -28,23 +28,7 @@ def main(pagina:Page):
 
     
 
-    # retornar a pagina principal
 
-    def returnPage(e):
-        dataCliente.value = dataCliente.value
-        horarioCliente.value = horarioCliente.value
-        senhainput.value = ''
-        pagina.clean()
-        pagina.add(
-            Row([Text("AGENDE SEU CORTE NO MÊS DE DEZEMBRO !")],
-                    alignment=MainAxisAlignment.CENTER),
-            Row([nomeCliente], alignment=MainAxisAlignment.CENTER),
-            Row([dataCliente], alignment=MainAxisAlignment.CENTER),
-            Row([horarioCliente], alignment=MainAxisAlignment.CENTER),
-            Row([botao], alignment=MainAxisAlignment.CENTER),
-            #Row([botao_cadastros], alignment=MainAxisAlignment.CENTER),
-        )
-        pagina.update()
 
     def adicionar_novo_dado(e):
         
@@ -91,12 +75,8 @@ def main(pagina:Page):
             if doc.exists:
 
                 text_resposta = Text(f"{nome} ja foi cadastrado!")
-                pagina.clean()
                 pagina.add(
                     Row([text_resposta], alignment=MainAxisAlignment.CENTER))
-                pagina.add(
-                    Row([botao_return], alignment=MainAxisAlignment.CENTER))
-                pagina.update()   
 
             else:
 
@@ -108,20 +88,14 @@ def main(pagina:Page):
 
                         text_resposta = Text(
                             f"Dia {dataCliente.value} não é uma data disponivel")
-                        pagina.clean()
                         pagina.add(
                             Row([text_resposta], alignment=MainAxisAlignment.CENTER))
-                        pagina.add(
-                            Row([botao_return], alignment=MainAxisAlignment.CENTER))
 
                     elif dataCliente.value in domingos:
                         text_resposta = Text(
                             f"Não abrimos aos domingos!")
-                        pagina.clean()
                         pagina.add(
                             Row([text_resposta], alignment=MainAxisAlignment.CENTER))
-                        pagina.add(
-                            Row([botao_return], alignment=MainAxisAlignment.CENTER))
                     else:
 
                         if not horarioCliente.value:
@@ -132,22 +106,16 @@ def main(pagina:Page):
                             if horarioCliente.value > 19 or horarioCliente.value < 9 or horarioCliente.value == 12:
                                 text_resposta = Text(
                                     f"Esse horario não está disponivel")
-                                pagina.clean()
                                 pagina.add(
                                     Row([text_resposta], alignment=MainAxisAlignment.CENTER))
-                                pagina.add(
-                                    Row([botao_return], alignment=MainAxisAlignment.CENTER))
 
                             else:
                                 adicionarDatas = dataCliente.value, horarioCliente.value
                                 if adicionarDatas in datasAgendadas:
                                     text_resposta = Text(
                                         f"{horarioCliente.value}hrs está ocupado, escolha um horario vago!")
-                                    pagina.clean()
                                     pagina.add(
                                         Row([text_resposta], alignment=MainAxisAlignment.CENTER))
-                                    pagina.add(
-                                        Row([botao_return], alignment=MainAxisAlignment.CENTER))
 
                                 else:
 
@@ -156,8 +124,6 @@ def main(pagina:Page):
                                     pagina.clean()
                                     pagina.add(
                                         Row([text_resposta], alignment=MainAxisAlignment.CENTER))
-                                    pagina.add(
-                                        Row([botao_return], alignment=MainAxisAlignment.CENTER))
 
                                     adicionar_novo_dado(e)
 
@@ -169,9 +135,7 @@ def main(pagina:Page):
     nomeCliente = TextField(label="Seu Nome")
     dataCliente = TextField(label="Dia (Ex: 12)")
     horarioCliente = TextField(label="Horário (Ex: 13)")
-    senhainput = TextField(label="Password", password=True)
     botao = ElevatedButton("Agendar", on_click=btn_click)
-    botao_return = ElevatedButton("voltar", on_click=returnPage)
     #botao_entrar = ElevatedButton("entrar", on_click=entrar)
     #botao_cadastros = ElevatedButton("Sou o Barbeiro", on_click=cadastros)
     # adicionar os itens na pagina
@@ -185,9 +149,7 @@ def main(pagina:Page):
         Row([botao], alignment=MainAxisAlignment.CENTER),
         #Row([botao_cadastros], alignment=MainAxisAlignment.CENTER),
     )
-    pagina.update()
 
 
 
-    
 app(target=main,view=WEB_BROWSER)
